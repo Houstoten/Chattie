@@ -4,6 +4,7 @@ import '../css/milligram.css';
 import { fetchData } from '../utils/Fetcher'
 import Spinner from './chat_components/Spinner'
 import Message from './chat_components/Message'
+import Breaker from './chat_components/Breaker'
 
 interface Data {
     id: string,
@@ -24,7 +25,7 @@ function Chat() {
         }));
     }
     if (data.length === 0) {
-        fetchData<Data>("https://5f162559a346a00016738b2a.mockapi.io/data", fetcherCallback);
+        fetchData("https://5f162559a346a00016738b2a.mockapi.io/data", fetcherCallback);
     }
     return (
         <div className="chat">
@@ -33,8 +34,12 @@ function Chat() {
                 <div className="row">head</div>
                 <div className="row chat-inner">
                     {data.map((el, i) => {
-                        // if (Date.now() - Date.parse(el.createdAt) >= 3)//todo append on each true and multiply
-                        //     return (<div><hr /><Message avatar={el.avatar} text={el.text} createdAt={el.createdAt} /></div>);
+                        if (new Date(el.createdAt).getUTCHours()
+                            < (data[i - 1]
+                                ? new Date(data[i - 1].createdAt).getUTCHours()
+                                : 25)
+                        )
+                            return (<><Breaker date={new Date(el.createdAt)} /><Message avatar={el.avatar} text={el.text} createdAt={el.createdAt} /></>);
                         return (<Message avatar={el.avatar} text={el.text} createdAt={el.createdAt} />);
                     })}
                 </div>
