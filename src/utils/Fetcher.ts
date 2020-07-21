@@ -1,14 +1,5 @@
-interface Data{
-    id: string,
-    text: string,
-    user: string,
-    avatar: string,
-    userId: string,
-    editedAt: string,
-    createdAt: string
-}
 
-export const fetchData = (url: string, callback: (arg: Array<Data>) => void) => {
+export const fetchData = <T>(url: string, callback: (arg: Array<T>) => void) => {
     Promise.resolve(fetch(url, {
         method: 'GET',
     }))

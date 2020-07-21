@@ -24,7 +24,7 @@ function Chat() {
         }));
     }
     if (data.length === 0) {
-        fetchData("https://5f162559a346a00016738b2a.mockapi.io/data", fetcherCallback);
+        fetchData<Data>("https://5f162559a346a00016738b2a.mockapi.io/data", fetcherCallback);
     }
     return (
         <div className="chat">
