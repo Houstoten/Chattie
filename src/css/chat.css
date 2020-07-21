@@ -9,7 +9,7 @@
     z-index: 100;
 }
 
-.fa-church{
+.fa-church {
     font-size: 4rem;
 }
 
@@ -32,7 +32,7 @@
     width: 100% !important;
 }
 
-.spinner{
+.spinner {
     position: absolute;
     background-color: #0000004b;
     height: 100%;
@@ -41,12 +41,12 @@
     color: antiquewhite;
 }
 
-.fa-spinner{
+.fa-spinner {
     position: relative;
     margin: 0;
 }
 
-.chat-inner{
+.chat-inner {
     overflow-y: auto;
     max-height: 400px;
     display: grid !important;
@@ -55,7 +55,7 @@
     text-align: left;
 }
 
-.message{
+.message {
     background-color: antiquewhite;
     display: flex;
     padding: 10px;
@@ -66,11 +66,11 @@
     width: fit-content;
 }
 
-.message .data{
+.message .data {
     width: 100%;
 }
 
-.message img{
+.message img {
     border-radius: 50%;
     height: 50px;
     width: 50px;
@@ -78,7 +78,7 @@
     user-select: none;
 }
 
-.message-createdAt{
+.message-createdAt {
     margin-top: 5px;
     text-align: right;
     font-size: 1.2rem;
@@ -86,7 +86,7 @@
     user-select: none;
 }
 
-.breaker{
+.breaker {
     display: flex;
     align-items: center;
     text-align: center;
@@ -95,7 +95,8 @@
     user-select: none;
 }
 
-.breaker::before, .breaker::after {
+.breaker::before,
+.breaker::after {
     content: '';
     flex: 1;
     border-bottom: 1px solid #606c76;
@@ -109,21 +110,50 @@
     margin-left: .25em;
 }
 
-@media(max-width:800px){
-    .message{
+.chat-header {
+    border-radius: 10px;
+}
+
+.headerWrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.chatSummary {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    align-items: center;
+}
+
+.chatName {
+    font-size: 2rem;
+}
+
+.chatParticipants {}
+
+.chatMessages {}
+
+.chatLast {
+    display: flex;
+    align-items: center;
+}
+
+@media(max-width:800px) {
+    .message {
         max-width: 100%;
     }
 }
 
-@media(max-width:400px){
-    .message{
+@media(max-width:400px) {
+    .message {
         max-width: 100%;
     }
-    .chat-wrapper{
+    .chat-wrapper {
         width: 100%;
     }
-    .chat-inner{
+    .chat-inner {
         max-height: 100%;
     }
 }
-

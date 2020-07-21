@@ -5,6 +5,7 @@ import { fetchData } from '../utils/Fetcher'
 import Spinner from './chat_components/Spinner'
 import Message from './chat_components/Message'
 import Breaker from './chat_components/Breaker'
+import Header from './chat_components/Header'
 
 interface Data {
     id: string,
@@ -25,13 +26,13 @@ function Chat() {
         }));
     }
     if (data.length === 0) {
-        fetchData("https://5f162559a346a00016738b2a.mockapi.io/data", fetcherCallback);
+        fetchData("https://edikdolynskyi.github.io/react_sources/messages.json", fetcherCallback);
     }
     return (
         <div className="chat">
             <div className="chat-wrapper">
                 {data.length === 0 && <Spinner />}
-                <div className="row">head</div>
+                <div className="row chat-header">{data.length !== 0 && <Header userCount={data.map(x=>x.userId).filter((v, i, a) => a.indexOf(v) === i).length} messagesCount={data.length} lastMessage={new Date(data[data.length - 1].createdAt)} />}</div>
                 <div className="row chat-inner">
                     {data.map((el, i) => {
                         if (new Date(el.createdAt).getUTCHours()
@@ -43,7 +44,7 @@ function Chat() {
                         return (<Message avatar={el.avatar} text={el.text} createdAt={el.createdAt} />);
                     })}
                 </div>
-                <div className="row">textblock</div>
+                <div className="row chat-input">textblock</div>
             </div>
         </div>
     );
