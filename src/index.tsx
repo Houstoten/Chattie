@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
-import App from './App';
+// import App from './App';
+import Chat from './controls_components/Chat'
+import PageHeader from './controls_components/PageHeader'
+
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <PageHeader />
+    <Chat />
   </React.StrictMode>,
   document.getElementById('root')
 );
