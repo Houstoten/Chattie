@@ -99,7 +99,7 @@ button {
 }
 
 .additional-component {
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .fa-edit:hover {
@@ -107,9 +107,22 @@ button {
     color: burlywood;
 }
 
-.fa-times:hover {
+.fa-times:hover,
+.fa-trash-alt:hover {
     color: tomato;
     cursor: pointer;
+}
+
+.fa-heart{
+    height: 100%;
+}
+
+.heart-liked:hover, .fa-heart:hover {
+    cursor: pointer;
+}
+
+.heart-liked {
+    color: red;
 }
 
 .message-edit-wrapper {

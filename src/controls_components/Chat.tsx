@@ -8,7 +8,6 @@ import Breaker from './chat_components/Breaker'
 import Header from './chat_components/Header'
 import MessageInput from './chat_components/MessageInput'
 import { mock } from './chat_components/mockUser';
-//import { mock } from './chat_components/mockUser'
 
 export interface Data {
     id: string,
@@ -17,7 +16,8 @@ export interface Data {
     avatar: string,
     userId: string,
     editedAt: string,
-    createdAt: string
+    createdAt: string,
+    likes?: string[]
 }
 
 function Chat() {
@@ -39,20 +39,35 @@ function Chat() {
             setData(data.concat([arg]))
     }
 
-    // function deleteSelfMessage(messageId: string):void{
+    function deleteSelfMessage(messageId: string): void {
+        setData(data.filter(el => el.id !== messageId));
+    }
 
-    // }
-
-    // function likeNotSelfMessage(messageId: string):void{
-
-    // }
+    function likeNotSelfMessage(messageId: string, userId: string): void {
+        data.map(el => {
+            if (el.id === messageId && el.userId !== mock.userId) {
+                if (el.likes?.find(e => e === userId)) {
+                    el.likes = el.likes.filter(ee => ee !== userId)
+                } else {
+                    if (el.likes) {
+                        el.likes.push(userId);
+                    } else {
+                        el.likes = [userId];
+                    }
+                }
+            }
+            return el;
+        });
+        setData(data.slice(0, data.length))
+    }
 
     function changeSelfMessage(messageId: string, newData: string): void {
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].id === messageId && data[i].userId === mock.userId) {
-                data[i].text = newData;
+        data.map(el => {
+            if (el.id === messageId && el.userId === mock.userId) {
+                el.text = newData
             }
-        }
+            return el;
+        });
         setData(data.slice(0, data.length))
     }
 
@@ -77,9 +92,27 @@ function Chat() {
                         )
                             return (<>
                                 <Breaker date={new Date(el.createdAt)} />
-                                <Message edit={(el.userId === mock.userId) ? changeSelfMessage : undefined} id={el.id} avatar={el.avatar} text={el.text} createdAt={el.createdAt} />
+                                <Message
+                                    like={(el.userId !== mock.userId) ? likeNotSelfMessage : undefined}
+                                    delete={(el.userId === mock.userId) ? deleteSelfMessage : undefined}
+                                    edit={(el.userId === mock.userId) ? changeSelfMessage : undefined}
+                                    whoLiked={el.likes || []}
+                                    thisUserId={mock.userId}
+                                    id={el.id}
+                                    avatar={el.avatar}
+                                    text={el.text}
+                                    createdAt={el.createdAt} />
                             </>);
-                        return (<Message edit={(el.userId === mock.userId) ? changeSelfMessage : undefined} id={el.id} avatar={el.avatar} text={el.text} createdAt={el.createdAt} />);
+                        return (<Message
+                            like={(el.userId !== mock.userId) ? likeNotSelfMessage : undefined}
+                            delete={(el.userId === mock.userId) ? deleteSelfMessage : undefined}
+                            edit={(el.userId === mock.userId) ? changeSelfMessage : undefined}
+                            whoLiked={el.likes || []}
+                            thisUserId={mock.userId}
+                            id={el.id}
+                            avatar={el.avatar}
+                            text={el.text}
+                            createdAt={el.createdAt} />);
                     })}
                 </div>
                 <div className="row chat-input">
