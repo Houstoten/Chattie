@@ -54,7 +54,9 @@ function Message(props: MessageProps) {
                     }
                     {props.like &&
                         <div className="message-like additional-component">
-                            <i className={"fas fa-heart " + (props.whoLiked.find(e => e === props.thisUserId) ? "heart-liked" : "")} onClick={() => props.like ? props.like(props.id, props.thisUserId) : null}></i>
+                            <i className={"fas fa-heart " + (props.whoLiked.find(e => e === props.thisUserId) ? "heart-liked" : "")}
+                                onClick={() => props.like ? props.like(props.id, props.thisUserId) : null}>
+                            </i>
                         </div>
                     }
                 </div>
