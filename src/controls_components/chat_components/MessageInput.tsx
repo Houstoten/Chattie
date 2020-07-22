@@ -29,7 +29,7 @@ function MessageInput(props: MessageInputInterface) {
     }
     return (
         <div className="inputWrapper">
-            <textarea value={input} onChange={handleInputChange} className="inputArea"></textarea>
+            <textarea placeholder="Are ya winning son?" value={input} onChange={handleInputChange} className="inputArea"></textarea>
             <button disabled={input.trim().length === 0
                 ? true
                 : false
@@ -40,7 +40,7 @@ function MessageInput(props: MessageInputInterface) {
                     setInput("");
                 }
                 }>
-                Send</button>
+                <i className="far fa-paper-plane"></i></button>
         </div>
     );
 }

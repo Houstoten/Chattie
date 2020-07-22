@@ -8,6 +8,7 @@ import Breaker from './chat_components/Breaker'
 import Header from './chat_components/Header'
 import MessageInput from './chat_components/MessageInput'
 import { mock } from './chat_components/mockUser';
+import { errorData } from './chat_components/loadErrorMessage'
 
 export interface Data {
     id: string,
@@ -22,12 +23,20 @@ export interface Data {
 
 function Chat() {
     const [data, setData] = useState([] as Data[]);
+    const [error, setError] = useState(false);
 
     function fetcherCallback(arg: Array<Data>): void {
-        setData(arg.sort((a, b) => {
-            return (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+        if (!arg.length) {
+            var errData = Object.assign({}, errorData);
+            errData.createdAt = new Date(Date.now()).toString();
+            setData(data.concat(errData));
+            setError(true);
+        } else {
+            setData(arg.sort((a, b) => {
+                return (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
 
-        }));
+            }));
+        }
     }
 
     if (data.length === 0) {
@@ -84,40 +93,27 @@ function Chat() {
                 </div>
                 <div className="row chat-inner">
                     {data.map((el, i) => {
-                        if (new Date(el.createdAt).getTime()
-                            - (data[i - 1]
-                                ? new Date(data[i - 1].createdAt).getTime()
-                                : 25)
-                            > 1000 * 60 * 60 * 24
-                        )
-                            return (<>
-                                <Breaker date={new Date(el.createdAt)} />
-                                <Message
-                                    like={(el.userId !== mock.userId) ? likeNotSelfMessage : undefined}
-                                    delete={(el.userId === mock.userId) ? deleteSelfMessage : undefined}
-                                    edit={(el.userId === mock.userId) ? changeSelfMessage : undefined}
-                                    whoLiked={el.likes || []}
-                                    thisUserId={mock.userId}
-                                    id={el.id}
-                                    avatar={el.avatar}
-                                    text={el.text}
-                                    createdAt={el.createdAt} />
-                            </>);
-                        return (<Message
-                            like={(el.userId !== mock.userId) ? likeNotSelfMessage : undefined}
-                            delete={(el.userId === mock.userId) ? deleteSelfMessage : undefined}
-                            edit={(el.userId === mock.userId) ? changeSelfMessage : undefined}
-                            whoLiked={el.likes || []}
-                            thisUserId={mock.userId}
-                            id={el.id}
-                            avatar={el.avatar}
-                            text={el.text}
-                            createdAt={el.createdAt} />);
+
+                        return (<div className="message-wrapper" key={el.id}>
+                            {(new Date(el.createdAt).getTime()
+                                - (data[i - 1]
+                                    ? new Date(data[i - 1].createdAt).getTime()
+                                    : 25)
+                                > 1000 * 60 * 60 * 24
+                            ) ? <Breaker date={new Date(el.createdAt)} /> : <></>}
+                            <Message
+                                like={(el.userId !== mock.userId) ? likeNotSelfMessage : undefined}
+                                delete={(el.userId === mock.userId) ? deleteSelfMessage : undefined}
+                                edit={(el.userId === mock.userId) ? changeSelfMessage : undefined}
+                                thisUserId={mock.userId}
+                                data={el} />
+                        </div>);
                     })}
                 </div>
-                <div className="row chat-input">
-                    <MessageInput inputCallback={inputAppendCallBack} />
-                </div>
+                {!error &&
+                    <div className="row chat-input">
+                        <MessageInput inputCallback={inputAppendCallBack} />
+                    </div>}
             </div>
         </div>
     );

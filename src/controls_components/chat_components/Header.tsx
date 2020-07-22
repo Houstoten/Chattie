@@ -11,12 +11,12 @@ function Header(props: HeaderData) {
     return (
         <div className="headerWrapper">
             <div className="chatSummary">
-                <div className="chatName">Christians</div>
-                <div className="chatParticipants">{props.userCount} participants</div>
-                <div className="chatMessages">{props.messagesCount} messages</div>
+                <div className="chatName">Chattie</div>
+                <div className="chatParticipants"><i className="fas fa-users" style={{ paddingRight: "5px" }}></i>{props.userCount} participants</div>
+                <div className="chatMessages"><i className="fas fa-envelope-open" style={{ paddingRight: "5px" }}></i>{props.messagesCount} messages</div>
             </div>
             <div className="chatLast">last message {new Date().getTime() - props.lastMessage.getTime() < (1000 * 60 * 60 * 24)
-                ? "at " + props.lastMessage.toLocaleTimeString()
+                ? "today at " + props.lastMessage.toLocaleTimeString()
                 : props.lastMessage.toLocaleDateString()
             }</div>
         </div>
