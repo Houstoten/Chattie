@@ -1,9 +1,6 @@
 {
   "name": "bsa-react-1",
   "version": "0.1.0",
-  "engines": {
-    "node": "^10.21.0"
-  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -16,17 +13,13 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "typescript": "^3.7.5",
-    "express": "^4.16.3",
-    "express-favicon": "^2.0.1",
-    "path": "^0.12.7"
+    "typescript": "^3.7.5"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "serve -s build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
