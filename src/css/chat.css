@@ -6,10 +6,6 @@ body {
     background-color: #fff;
 }
 
-.fa-church {
-    font-size: 4rem;
-}
-
 .chat-wrapper {
     width: 60%;
     display: grid;
@@ -237,6 +233,7 @@ input {
     display: flex;
     justify-content: space-between;
     width: 50%;
+    max-width: 70%;
     align-items: center;
 }
 
@@ -320,13 +317,40 @@ input {
     cursor: default;
 }
 
+.chatParticipants:after{
+    content: " participants";
+}
+
+.chatMessages:after{
+    content: " messages";
+}
+
 @media(max-width:800px) {
     .message {
         max-width: 100%;
     }
+    .chatSummary{
+        width: 80%;
+    }
 }
 
-@media(max-width:400px) {
+@media(max-width: 600px) {
+    .chatSummary{
+        max-width: 100%;
+        width: 100%;
+    }
+    .chatParticipants:after{
+        content: "";
+    }
+
+    .chatMessages:after{
+        content: "";
+    }
+
+    .chatLast{
+        display: none;
+    }
+
     .message {
         max-width: 100%;
     }
