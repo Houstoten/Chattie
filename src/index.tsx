@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
-import Chat from './controls_components/Chat'
+import Chat from './Chat'
 import * as serviceWorker from './serviceWorker';
+import { store } from './store'
+const { Provider } = require('react-redux');
 
 ReactDOM.render(
   <React.StrictMode>
-    <Chat />
+    <Provider store={store}>
+      <Chat />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

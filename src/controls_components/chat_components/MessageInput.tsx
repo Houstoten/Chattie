@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../../css/chat.css';
-import { Data } from '../Chat'
-import { mock } from './mockUser'
+import { Data, mock } from '../../Common'
 import { uuidv4 } from '../../utils/UUIDv4'
 
 

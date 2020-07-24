@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../../css/chat.css';
-import { Data } from '../Chat'
+import { Data } from '../Common'
 
 interface MessageProps {
     data: Data,
