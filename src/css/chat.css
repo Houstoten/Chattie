@@ -6,11 +6,21 @@ body {
     background-color: #fff;
 }
 
+.additional-onHover {
+    display: none;
+}
+
+.message:hover .additional-onHover {
+    display: block;
+}
+
 .eraser {
     display: none !important;
 }
 
 .editWrapper {
+    -webkit-animation: message 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+    animation: message 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
     position: fixed;
     top: 0;
     backdrop-filter: blur(20px);
@@ -130,13 +140,19 @@ button {
     margin-right: 10px;
 }
 
-.fa-edit:hover {
+.fa-cog {
+    -webkit-transition: -webkit-transform .4s ease-in-out;
+    transition: transform .4s ease-in-out;
+}
+
+.fa-cog:hover {
     cursor: pointer;
-    color: burlywood;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 .fa-trash-alt:hover {
-    color: tomato;
+    color: red;
     cursor: pointer;
 }
 

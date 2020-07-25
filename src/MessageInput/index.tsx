@@ -3,10 +3,11 @@ import '../css/chat.css';
 import { Data } from '../Common'
 import { bindActionCreators } from 'redux';
 import { inputMessage } from './actions'
+import { editMessageShowUnindexed } from '../Message/actions'
 const { connect } = require('react-redux');
 
 
-const MessageInput = (props: { inputMessage: (message: string) => void }): any => {
+const MessageInput = (props: { inputMessage: (message: string) => void, editMessageShowUnindexed: (head: boolean) => void }): any => {
     const [input, setInput] = useState("");
 
     function validateAndComplete(): Data | undefined {
@@ -21,9 +22,18 @@ const MessageInput = (props: { inputMessage: (message: string) => void }): any =
         setInput(event.target.value);
     }
 
+    function handleLastEditing(): any {
+        props.editMessageShowUnindexed(false);
+    }
+
     return (
         <div className="inputWrapper">
-            <textarea placeholder="Are ya winning son?" value={input} onChange={handleInputChange} className="inputArea"></textarea>
+            <textarea autoFocus onKeyDown={e => {
+                if (e.keyCode === 38 && input.trim().length === 0) {
+                    e.preventDefault();
+                    handleLastEditing();
+                }
+            }} placeholder="Are ya winning son?" value={input} onChange={handleInputChange} className="inputArea"></textarea>
             <button disabled={input.trim().length === 0
                 ? true
                 : false
@@ -39,7 +49,8 @@ const MessageInput = (props: { inputMessage: (message: string) => void }): any =
 }
 
 const actions = {
-    inputMessage
+    inputMessage,
+    editMessageShowUnindexed
 };
 
 const mapDispatchToProps = (dispatch: any) => bindActionCreators(actions, dispatch);

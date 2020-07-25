@@ -36,17 +36,17 @@ const Message = (props: {
                 <div className="message-text">{props.data.text}</div>
                 <div className="message-additional">
                     <div className="message-timestamp additional-component">
-                        {new Date(props.data.createdAt).toLocaleTimeString()}
+                        {new Date(props.data.createdAt).toLocaleTimeString() + (props.data.editedAt.length !== 0 ? " edited" : "")}
                     </div>
                     {selfMessage &&
-                        <div className="message-edit additional-component">
+                        <div className="message-edit additional-component additional-onHover">
                             {props.editingMessage.messageId.length === 0 &&
-                                <i className="far fa-edit" onClick={() => { props.editMessageShow(props.data.id) }}></i>
+                                <i className="fas fa-cog" onClick={() => { props.editMessageShow(props.data.id) }}></i>
                             }
                         </div>
                     }
                     {selfMessage &&
-                        <div className="message-delete additional-component">
+                        <div className="message-delete additional-component additional-onHover">
                             <i className="fas fa-trash-alt" onClick={() => props.deleteMessage(props.data.id)}></i>
                         </div>
                     }

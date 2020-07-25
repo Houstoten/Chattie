@@ -13,7 +13,6 @@ const MessageEdit = (props: {
 }): any => {
     const [input, setInput] = useState(props.editingMessage.message);
     const [editing, setEditing] = useState(false);
-
     function validateAndComplete(): Data | undefined {
         if (input.trim().length === 0) {
             return;
@@ -35,7 +34,9 @@ const MessageEdit = (props: {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => { if (!editing && props.editingMessage.message !== input) { setInput(props.editingMessage.message); setEditing(true) } })
+    useEffect(() => { if (!editing && props.editingMessage.message !== input) { editRef.current.focus(); setInput(props.editingMessage.message); setEditing(true) } })
+
+    const editRef: any = React.createRef();
 
     return (
         <div className={"editWrapper " + (props.editingMessage.messageId.trim().length === 0
@@ -43,13 +44,17 @@ const MessageEdit = (props: {
             : "")}
         >
             <div className="editInner">
-                <textarea onKeyPress={e => {
+                <textarea ref={editRef} onKeyDown={e => {
                     if (e.key === "Enter" && !e.shiftKey) {
                         e.preventDefault();
                         validateAndComplete();
                     }
+                    if (e.keyCode === 27) {
+                        e.preventDefault();
+                        abortEdit();
+                    }
                 }} placeholder="Are ya winning son?" value={input} onChange={handleInputChange} className="inputArea editInputArea"></textarea>
-                <form className="editControlBox">
+                <div className="editControlBox">
                     <button
                         className="button editBtn abortEditBtn"
                         onClick={() => {
@@ -67,7 +72,7 @@ const MessageEdit = (props: {
                         }
                         }>
                         <i className="far fa-paper-plane"></i></button>
-                </form>
+                </div>
             </div>
         </div>
     );

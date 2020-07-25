@@ -25,6 +25,10 @@ export const fetchMessages = (url: string) => async (dispatch: any) => {
             data.push(errData);
             isError = true;
         }
+        data.sort((a, b) => {
+            return (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            )
+        });
         dispatch({ type: RESPONSE_MESSAGES, data: data, error: isError } as ResponseMessages);
     }
 };

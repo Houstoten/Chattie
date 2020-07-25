@@ -28,6 +28,20 @@ function messages(state = { data: [] as Data[], thisUserId: mock.userId as strin
                     message: state.data.find(el => el.id === action.messageId)?.text
                 }
             });
+        case (mActionTypes.EDIT_MESSAGE_SHOW_UNINDEXED):
+            let messageToEdit: Data | undefined;
+            if (action.head) {
+                messageToEdit = state.data.find(data => data.userId === mock.userId);
+            } else {
+                messageToEdit = Object.assign([] as Data[], state.data).reverse().find(data => data.userId === mock.userId);
+            }
+            return ({
+                ...state,
+                editingMessage: {
+                    messageId: messageToEdit ? messageToEdit.id : editingMessageInitial.messageId,
+                    message: messageToEdit ? messageToEdit.text : editingMessageInitial.message
+                }
+            });
         case (mActionTypes.LIKE_MESSAGE):
             return ({
                 ...state,
@@ -62,6 +76,7 @@ function messages(state = { data: [] as Data[], thisUserId: mock.userId as strin
                 ...state, data: state.data.filter(el => {
                     if (el.id === action.messageId && el.userId === mock.userId) {
                         el.text = action.message
+                        el.editedAt = new Date(Date.now()).toString();
                     }
                     return true;
                 })
