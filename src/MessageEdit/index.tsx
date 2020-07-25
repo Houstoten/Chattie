@@ -44,6 +44,7 @@ const MessageEdit = (props: {
             : "")}
         >
             <div className="editInner">
+                <label style={{ userSelect: "none", fontSize: "1.2rem" }} >Enter to edit data. Shift+Enter for new line.</label>
                 <textarea ref={editRef} onKeyDown={e => {
                     if (e.key === "Enter" && !e.shiftKey) {
                         e.preventDefault();
@@ -79,7 +80,7 @@ const MessageEdit = (props: {
 }
 
 const mapStateToProps = (rootState: any) => ({
-    editingMessage: rootState.messages.editingMessage
+    editingMessage: rootState.edit.editingMessage
 });
 
 const actions = {

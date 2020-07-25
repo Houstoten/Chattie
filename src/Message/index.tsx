@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../css/chat.css';
-import { likeMessage, editMessageShow, deleteMessage } from './actions'
+import { likeMessage, deleteMessage } from './actions'
+import { editMessageShow } from '../MessageEdit/actions'
 import { bindActionCreators } from 'redux';
 import { Data } from '../Common';
 const { connect } = require('react-redux');
@@ -65,7 +66,7 @@ const Message = (props: {
 
 const mapStateToProps = (rootState: any) => ({
     thisUserId: rootState.messages.thisUserId as string,
-    editingMessage: rootState.messages.editingMessage
+    editingMessage: rootState.edit.editingMessage
 });
 
 const actions = {

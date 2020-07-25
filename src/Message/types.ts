@@ -1,27 +1,16 @@
-export const EDIT_MESSAGE_SHOW = "EDIT_MESSAGE_SHOW";
-export const EDIT_MESSAGE_SHOW_UNINDEXED = "EDIT_MESSAGE_SHOW_UNINDEXED";
+import { Data } from "../Common";
+
 export const DELETE_MESSAGE = "DELETE_MESSAGE";
 export const LIKE_MESSAGE = "LIKE_MESSAGE";
 
-export interface EditMessageShow {
-    type: typeof EDIT_MESSAGE_SHOW
-    messageId: string
-}
-
-export interface EditMessageShowUnindexed {
-    type: typeof EDIT_MESSAGE_SHOW_UNINDEXED
-    head: boolean//if true edit head. if false - tail
-}
-
 export interface DeleteMessage {
     type: typeof DELETE_MESSAGE
-    messageId: string
+    payload: Data[]
 }
 
 export interface LikeMessage {
     type: typeof LIKE_MESSAGE
-    messageId: string
-    likerId: string
+    payload: Data[]
 }
 
-export type MessageActionTypes = EditMessageShow | DeleteMessage | LikeMessage | EditMessageShowUnindexed;
+export type MessageActionTypes = DeleteMessage | LikeMessage;

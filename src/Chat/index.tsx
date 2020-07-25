@@ -3,9 +3,9 @@ import '../css/chat.css';
 import '../css/milligram.css';
 import { fetchMessages } from './actions'
 import { bindActionCreators } from 'redux';
-import Spinner from '../controls_components/chat_components/Spinner';
-import Header from '../controls_components/chat_components/Header';
-import Breaker from '../controls_components/chat_components/Breaker';
+import Spinner from '../Components/Spinner';
+import Header from '../Components/Header';
+import Breaker from '../Components/Breaker';
 import Message from '../Message';
 import { Data } from '../Common';
 import MessageInput from '../MessageInput';

@@ -197,16 +197,21 @@ button {
 }
 
 .abortEditBtn {
-    background-color: #606c76 !important;
-    border-color: #606c76 !important;
+    background-color: transparent !important;
 }
 
 .abortEditBtn:hover {
     background-color: red !important;
     border-color: red !important;
+    color: transparent !important;
+}
+
+.abortEditBtn:hover .fa-times  {
+    color: #fff;
 }
 
 .abortEditBtn .fa-times {
+    color: #9b4dca;
     font-size: 1.7rem !important;
 }
 

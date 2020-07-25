@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../css/chat.css';
-import { weekDay } from '../../utils/weekDay'
+import '../css/chat.css';
+import { weekDay } from '../utils/weekDay'
 
 interface BreakerProps {
     date: Date

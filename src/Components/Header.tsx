@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../css/chat.css';
+import '../css/chat.css';
 
 interface HeaderData {
     userCount: number,

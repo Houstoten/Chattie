@@ -3,7 +3,7 @@ import '../css/chat.css';
 import { Data } from '../Common'
 import { bindActionCreators } from 'redux';
 import { inputMessage } from './actions'
-import { editMessageShowUnindexed } from '../Message/actions'
+import { editMessageShowUnindexed } from '../MessageEdit/actions'
 const { connect } = require('react-redux');
 
 

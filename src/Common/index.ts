@@ -28,3 +28,8 @@ export const mock: Data = {
     text: "",
     createdAt: ""
 }
+
+export const editingMessageInitial = {
+    messageId: "",
+    message: ""
+}
