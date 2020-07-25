@@ -6,6 +6,32 @@ body {
     background-color: #fff;
 }
 
+.eraser {
+    display: none !important;
+}
+
+.editWrapper {
+    position: fixed;
+    top: 0;
+    backdrop-filter: blur(20px);
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editInner {
+    width: 80%;
+    height: 60%;
+}
+
+.editInputArea {
+    height: 100% !important;
+    padding-right: 1rem !important;
+}
+
 .chat-wrapper {
     width: 60%;
     display: grid;
@@ -109,7 +135,6 @@ button {
     color: burlywood;
 }
 
-.fa-times:hover,
 .fa-trash-alt:hover {
     color: tomato;
     cursor: pointer;
@@ -134,18 +159,20 @@ button {
     position: relative;
 }
 
-.message-edit-input{
+.message-edit-input {
     padding-right: 40px !important;
 }
 
+.editControlBox {
+    justify-content: space-between;
+    display: flex;
+}
+
 .editBtn {
-    top: 4px;
-    width: 30px !important;
-    height: 30px !important;
-    margin: 0 5px 0 0 !important;
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    position: relative !important;
+    width: 50px !important;
+    height: 50px !important;
+    margin: 0 !important;
     padding: 0 !important;
     border-radius: 50% !important;
     display: flex !important;
@@ -153,7 +180,21 @@ button {
     justify-content: center;
 }
 
-.editBtn .fa-paper-plane{
+.abortEditBtn {
+    background-color: #606c76 !important;
+    border-color: #606c76 !important;
+}
+
+.abortEditBtn:hover {
+    background-color: red !important;
+    border-color: red !important;
+}
+
+.abortEditBtn .fa-times {
+    font-size: 1.7rem !important;
+}
+
+.editBtn .fa-paper-plane {
     font-size: 1.7rem !important;
 }
 
@@ -317,11 +358,11 @@ input {
     cursor: default;
 }
 
-.chatParticipants:after{
+.chatParticipants:after {
     content: " participants";
 }
 
-.chatMessages:after{
+.chatMessages:after {
     content: " messages";
 }
 
@@ -329,28 +370,25 @@ input {
     .message {
         max-width: 100%;
     }
-    .chatSummary{
+    .chatSummary {
         width: 80%;
     }
 }
 
 @media(max-width: 600px) {
-    .chatSummary{
+    .chatSummary {
         max-width: 100%;
         width: 100%;
     }
-    .chatParticipants:after{
+    .chatParticipants:after {
         content: "";
     }
-
-    .chatMessages:after{
+    .chatMessages:after {
         content: "";
     }
-
-    .chatLast{
+    .chatLast {
         display: none;
     }
-
     .message {
         max-width: 100%;
     }

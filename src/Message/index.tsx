@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../../css/chat.css';
-import { Data } from '../Common'
+import '../css/chat.css';
+import { likeMessage, editMessageShow, deleteMessage } from './actions'
+import { bindActionCreators } from 'redux';
+import { Data } from '../Common';
+const { connect } = require('react-redux');
 
-interface MessageProps {
+const Message = (props: {
     data: Data,
     thisUserId: string,
-    edit: ((messageId: string, newData: string) => void) | undefined,
-    delete: ((messageId: string) => void) | undefined,
-    like: ((messageId: string, userId: string) => void) | undefined
-}
+    editingMessage: any
+    likeMessage: (messageId: string, likerId: string) => void,
+    editMessageShow: (messageId: string) => void,
+    deleteMessage: (messageId: string) => void
+}): any => {
 
-function Message(props: MessageProps) {
-
-    const [edit, setEdit] = useState("");
-    const [editing, setEditing] = useState(false);
     const [scrolling, setScrolling] = useState(true);
     const selfMessage = props.data.userId === props.thisUserId;
 
@@ -33,46 +33,27 @@ function Message(props: MessageProps) {
                 } />}
             <div className="data">
                 <div className={"message-holderName " + (selfMessage ? "message-holderName-self" : "")}>{selfMessage ? "me" : props.data.user}</div>
-                {!editing ?
-                    <div className="message-text">{props.data.text}</div>
-                    : <div className="message-edit-wrapper">
-                        <input className="message-edit-input" value={edit} onChange={e => setEdit(e.target.value)}></input>
-                        <button
-                            className="editBtn"
-                            disabled={edit.trim().length === 0
-                                ? true
-                                : false}
-                            onClick={() => {
-                                if (props.edit) {
-                                    props.edit(props.data.id, edit);
-                                    setEditing(false);
-                                    setEdit("");
-                                }
-                            }
-                            }><i className="far fa-paper-plane"></i></button>
-                    </div>
-                }
+                <div className="message-text">{props.data.text}</div>
                 <div className="message-additional">
                     <div className="message-timestamp additional-component">
                         {new Date(props.data.createdAt).toLocaleTimeString()}
                     </div>
-                    {props.edit &&
+                    {selfMessage &&
                         <div className="message-edit additional-component">
-                            {!editing ?
-                                <i className="far fa-edit" onClick={() => { setEdit(props.data.text); setEditing(true) }}></i>
-                                : <i className="fas fa-times" onClick={() => { setEdit(""); setEditing(false) }}></i>
+                            {props.editingMessage.messageId.length === 0 &&
+                                <i className="far fa-edit" onClick={() => { props.editMessageShow(props.data.id) }}></i>
                             }
                         </div>
                     }
-                    {props.delete &&
+                    {selfMessage &&
                         <div className="message-delete additional-component">
-                            <i className="fas fa-trash-alt" onClick={() => props.delete ? props.delete(props.data.id) : null}></i>
+                            <i className="fas fa-trash-alt" onClick={() => props.deleteMessage(props.data.id)}></i>
                         </div>
                     }
-                    {props.like &&
+                    {!selfMessage &&
                         <div className="message-like additional-component">
-                            <i className={"fas fa-heart " + (props.data.likes?.find(e => e === props.thisUserId) ? "heart-liked" : "")}
-                                onClick={() => props.like ? props.like(props.data.id, props.thisUserId) : null}>
+                            <i className={"fas fa-heart " + (props.data.likes?.find((e: string) => e === props.thisUserId) ? "heart-liked" : "")}
+                                onClick={() => props.likeMessage(props.data.id, props.thisUserId)}>
                             </i>
                         </div>
                     }
@@ -82,4 +63,20 @@ function Message(props: MessageProps) {
     );
 }
 
-export default Message;
+const mapStateToProps = (rootState: any) => ({
+    thisUserId: rootState.messages.thisUserId as string,
+    editingMessage: rootState.messages.editingMessage
+});
+
+const actions = {
+    likeMessage,
+    editMessageShow,
+    deleteMessage
+};
+
+const mapDispatchToProps = (dispatch: any) => bindActionCreators(actions, dispatch);
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Message);

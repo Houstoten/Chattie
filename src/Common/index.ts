@@ -6,8 +6,7 @@ export interface Data {
     userId: string,
     editedAt: string,
     createdAt: string,
-    likes?: string[],
-    isEditing?: boolean
+    likes?: string[]
 }
 
 export const errorData: Data = {

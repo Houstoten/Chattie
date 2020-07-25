@@ -4,12 +4,14 @@ import './css/index.css';
 import Chat from './Chat'
 import * as serviceWorker from './serviceWorker';
 import { store } from './store'
+import MessageEdit from './MessageEdit';
 const { Provider } = require('react-redux');
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Chat />
+      <MessageEdit />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
