@@ -37,7 +37,7 @@ const Message = (props: {
                 <div className="message-text">{props.data.text}</div>
                 <div className="message-additional">
                     <div className="message-timestamp additional-component">
-                        {new Date(props.data.createdAt).toLocaleTimeString() + (props.data.editedAt.length !== 0 ? " edited" : "")}
+                        {new Date(props.data.createdAt).toLocaleTimeString() + (props.data.editedAt ? " edited" : "")}
                     </div>
                     {selfMessage &&
                         <div className="message-edit additional-component additional-onHover">
