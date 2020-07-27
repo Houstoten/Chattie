@@ -1,11 +1,10 @@
 package com.bsa.houston.chattie.users;
 
+import com.bsa.houston.chattie.users.Dto.UserCreateDto;
 import com.bsa.houston.chattie.users.Dto.UserResponseDto;
+import com.bsa.houston.chattie.users.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,4 +20,10 @@ public class UserConroller {
     public List<UserResponseDto> getAllUsers(){
         return userService.getAllUsers();
     }
+
+    @PostMapping("/create")
+    public UserResponseDto createUser(@RequestBody UserCreateDto userCreateDto){
+        return userService.createUser(userCreateDto);
+    }
+
 }

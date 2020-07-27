@@ -1,5 +1,6 @@
 package com.bsa.houston.chattie.messages;
 
+import com.bsa.houston.chattie.messages.Dto.MessageEditReceiveDto;
 import com.bsa.houston.chattie.messages.Dto.MessageReceiveDto;
 import com.bsa.houston.chattie.messages.Dto.MessageResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,13 @@ public class ChatService {
 
     public void deleteMessage(UUID id) {
         chatRepository.deleteById(id);
+    }
+
+    public void editMessage(MessageEditReceiveDto messageEditReceiveDto) {
+        chatRepository.save(messageEditReceiveDto.toMessage());
+    }
+
+    public MessageResponseDto getMessageById(UUID id) {
+        return MessageResponseDto.fromMessage(chatRepository.getOne(id));
     }
 }

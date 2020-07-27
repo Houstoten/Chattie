@@ -13,7 +13,7 @@ const { connect } = require('react-redux');
 
 const Chat = (props: any): any => {
     if (!props.data.length && !props.isFetching && !props.error)
-        props.fetchMessages("http://localhost:8080/api/chat/all");
+        props.fetchMessages();
 
     return (<div className="chat">
         <div className="chat-wrapper">
