@@ -23,7 +23,7 @@ export const mock: Data = {
     id: "",
     user: "Katy",
     avatar: "https://thispersondoesnotexist.com/image",
-    userId: "c499274c-4116-40c0-8efe-1a652219df5f",
+    userId: "5328dba1-1b8f-11e8-9629-c7eca82aa7bd",
     editedAt: "",
     text: "",
     createdAt: ""

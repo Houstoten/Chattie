@@ -9,7 +9,7 @@ const { connect } = require('react-redux');
 const MessageEdit = (props: {
     editingMessage: { messageId: string, message: string }
     , editMessageSave: (messageId: string, message: string) => void
-    , editMessageInvalidateAndClose: (messageId: string) => void
+    , editMessageInvalidateAndClose: () => void
 }): any => {
     const [input, setInput] = useState(props.editingMessage.message);
     const [editing, setEditing] = useState(false);
@@ -18,13 +18,13 @@ const MessageEdit = (props: {
             return;
         }
         props.editMessageSave(props.editingMessage.messageId, input);
-        props.editMessageInvalidateAndClose(props.editingMessage.messageId);
+        props.editMessageInvalidateAndClose();
         setInput("");
         setEditing(false);
     }
 
     function abortEdit() {
-        props.editMessageInvalidateAndClose(props.editingMessage.messageId);
+        props.editMessageInvalidateAndClose();
         setEditing(false);
         setInput("");
     }

@@ -38,6 +38,11 @@ public class ChatController {
         chatService.editMessage(messageEditReceiveDto);
     }
 
+    @PutMapping("/like/{id}")
+    public void likeMessage(@PathVariable UUID id, @RequestParam UUID userId){
+        chatService.likeMessage(id, userId);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteMessage(@PathVariable UUID id) {
         chatService.deleteMessage(id);
