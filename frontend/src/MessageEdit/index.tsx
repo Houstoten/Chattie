@@ -57,13 +57,15 @@ const MessageEdit = (props: {
                     }
                 }} placeholder="Are ya winning son?" value={input} onChange={handleInputChange} className="inputArea editInputArea"></textarea>
                 <div className="editControlBox">
-                    <button
-                        className="button editBtn abortEditBtn"
-                        onClick={() => {
-                            abortEdit();
-                        }
-                        }>
-                        <i className="fas fa-times"></i></button>
+                    <Link to="/">
+                        <button
+                            className="button editBtn abortEditBtn"
+                            onClick={() => {
+                                abortEdit();
+                            }
+                            }>
+                            <i className="fas fa-times"></i></button>
+                    </Link>
                     <Link to="/" style={input.trim().length === 0 ? { pointerEvents: "none" } : {}}>
                         <button disabled={input.trim().length === 0
                             ? true

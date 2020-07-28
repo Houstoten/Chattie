@@ -6,7 +6,7 @@ import { INPUT_MESSAGE } from "./types";
 
 export function* inputMessage(action: any) {
     try {
-        yield call(axios.post, `${api}/messages`, { userId: action.payload.userId, text: action.payload.text }, { headers: yield select((state: any) => state.thisUser.credentials) });
+        yield call(axios.post, `${api}/messages`, { userId: yield select((state: any) => state.thisUser.credentials.id), text: action.payload.text }, { headers: yield select((state: any) => state.thisUser.credentials) });
         yield put({ type: REQUEST_MESSAGES })
     } catch (error) {
         console.log(error);

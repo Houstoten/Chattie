@@ -29,6 +29,13 @@ export const mock: Data = {
     createdAt: ""
 }
 
+export const usetDetailsInitial = {
+    username: null,
+    password: null,
+    avatar: null,
+    admin: null
+}
+
 export const credentialsInitial = {
     id: null,
     token: null,

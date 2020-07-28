@@ -5,20 +5,21 @@ import { editMessageShow } from '../MessageEdit/actions'
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom'
 import { Data } from '../Common';
+import { openUserEditCreate } from '../EditCreateUser/actions';
 const { connect } = require('react-redux');
 
 const Message = (props: {
     data: Data,
-    thisUserId: string,
+    thisUser: any,
     editingMessage: any
     likeMessage: (messageId: string, likerId: string) => void,
     editMessageShow: (messageId: string) => void,
     deleteMessage: (messageId: string) => void,
-    history: any
+    editOrCreateUser: (id: string | null) => void
 }): any => {
 
     const [scrolling, setScrolling] = useState(true);
-    const selfMessage = props.data.userId === props.thisUserId;
+    const selfMessage = props.data.userId === props.thisUser.id;
 
     const scrollToRef = (ref: any) => window.scrollTo({ top: ref.current.offsetTop, behavior: "smooth" });
     const messageRef = useRef(null);
@@ -36,6 +37,7 @@ const Message = (props: {
                 } />}
             <div className="data">
                 <div className={"message-holderName " + (selfMessage ? "message-holderName-self" : "")}>{selfMessage ? "me" : props.data.user}</div>
+                {props.thisUser.admin && <Link to={`/user/${props.thisUser.id}`} onClick={() => openUserEditCreate(props.thisUser.id)}>Edit sender</Link>}
                 <div className="message-text">{props.data.text}</div>
                 <div className="message-additional">
                     <div className="message-timestamp additional-component">
@@ -55,8 +57,8 @@ const Message = (props: {
                     }
                     {!selfMessage &&
                         <div className="message-like additional-component">
-                            <i className={"fas fa-heart " + (props.data.likes?.find((e: string) => e === props.thisUserId) ? "heart-liked" : "")}
-                                onClick={() => props.likeMessage(props.data.id, props.thisUserId)}>
+                            <i className={"fas fa-heart " + (props.data.likes?.find((e: string) => e === props.thisUser.id) ? "heart-liked" : "")}
+                                onClick={() => props.likeMessage(props.data.id, props.thisUser.id)}>
                             </i>
                         </div>
                     }
@@ -67,14 +69,16 @@ const Message = (props: {
 }
 
 const mapStateToProps = (rootState: any) => ({
-    thisUserId: rootState.messages.thisUserId as string,
-    editingMessage: rootState.edit.editingMessage
+    thisUser: rootState.thisUser.credentials as string,
+    editingMessage: rootState.edit.editingMessage,
+    editingUser: rootState.userEditCreate.details
 });
 
 const actions = {
     likeMessage,
     editMessageShow,
-    deleteMessage
+    deleteMessage,
+    openUserEditCreate
 };
 
 const mapDispatchToProps = (dispatch: any) => bindActionCreators(actions, dispatch);

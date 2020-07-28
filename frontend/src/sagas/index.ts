@@ -4,6 +4,7 @@ import inputSagas from "../MessageInput/sagas"
 import editMessageSagas from "../MessageEdit/sagas"
 import messageOperationSagas from "../Message/sagas";
 import loginSagas from "../LoginPage/sagas";
+import userOpsSagas from "../EditCreateUser/sagas";
 
 export default function* rootSaga() {
     yield all([
@@ -11,6 +12,7 @@ export default function* rootSaga() {
         inputSagas(),
         editMessageSagas(),
         messageOperationSagas(),
-        loginSagas()
+        loginSagas(),
+        userOpsSagas()
     ]);
 }
