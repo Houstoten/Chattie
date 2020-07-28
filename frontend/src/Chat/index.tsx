@@ -9,13 +9,14 @@ import Breaker from '../Components/Breaker';
 import Message from '../Message';
 import { Data } from '../Common';
 import MessageInput from '../MessageInput';
+import { Redirect } from 'react-router-dom';
 const { connect } = require('react-redux');
 
 const Chat = (props: any): any => {
     if (!props.data.length && !props.isFetching && !props.error)
-        props.fetchMessages("https://edikdolynskyi.github.io/react_sources/messages.json");
+        props.fetchMessages();
 
-    return (<div className="chat">
+    return (props.token ? <div className="chat">
         <div className="chat-wrapper">
             {props.data.length === 0 && <Spinner />}
             <div className="row chat-header">{props.data.length !== 0
@@ -40,11 +41,12 @@ const Chat = (props: any): any => {
                 })}
             </div>
             {!props.error &&
-                    <div className="row chat-input">
-                        <MessageInput />
-                    </div>}
+                <div className="row chat-input">
+                    <MessageInput />
+                </div>}
         </div>
-    </div>);
+    </div>
+        : <Redirect to="/login" />);
 
 
 };
@@ -52,7 +54,8 @@ const Chat = (props: any): any => {
 const mapStateToProps = (rootState: any) => ({
     data: rootState.messages.data,
     isFetching: rootState.messages.isFetching,
-    error: rootState.messages.error
+    error: rootState.messages.error,
+    token: rootState.thisUser.credentials.token
 });
 
 const actions = {

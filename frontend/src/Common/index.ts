@@ -21,15 +21,31 @@ export const errorData: Data = {
 
 export const mock: Data = {
     id: "",
-    user: "Daniel",
+    user: "Katy",
     avatar: "https://thispersondoesnotexist.com/image",
-    userId: "2c34b119-eda4-4dfa-84b8-27bf1a18b0d9",
+    userId: "5328dba1-1b8f-11e8-9629-c7eca82aa7bd",
     editedAt: "",
     text: "",
     createdAt: ""
+}
+
+export const usetDetailsInitial = {
+    username: null,
+    password: null,
+    avatar: null,
+    admin: null
+}
+
+export const credentialsInitial = {
+    id: null,
+    token: null,
+    admin: null
 }
 
 export const editingMessageInitial = {
     messageId: "",
     message: ""
 }
+
+export const api = "http://localhost:8080/api";
+//export const api = "https://bsa-husarov-chattie-backend.herokuapp.com/api";

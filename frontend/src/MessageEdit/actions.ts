@@ -1,48 +1,30 @@
-import { EDIT_MESSAGE_SAVE, EDIT_MESSAGE_INVALIDATE, EditMessageSave, EditMessageInvalidate, EDIT_MESSAGE_SHOW, EditMessageShow, EDIT_MESSAGE_SHOW_UNINDEXED, EditMessageShowUnindexed } from "./types"
-import { mock, editingMessageInitial, Data } from "../Common";
+import {  EDIT_MESSAGE_SHOW, EDIT_MESSAGE_SHOW_UNINDEXED, EDIT_MESSAGE_SAVE_REQUEST, EDIT_MESSAGE_INVALIDATE_REQUEST } from "./types"
 
-export const editMessageShow = (messageId: string) => (dispatch: any, getState: any) => {
-    dispatch({
+export const editMessageShow = (messageId: string) => {
+    return ({
         type: EDIT_MESSAGE_SHOW,
-        payload: {
-            messageId: messageId,
-            message: getState().messages.data.find((el: { id: any }) => el.id === messageId)?.text
-        }
-    } as EditMessageShow)
+        messageId: messageId,
+
+    })
 }
 
-export const editMessageShowUnindexed = (head: boolean) => (dispatch: any, getState: any) => {
-    let messageToEdit: Data | undefined;
-    if (head) {
-        messageToEdit = getState().messages.data.find((data: { userId: any; }) => data.userId === mock.userId);
-    } else {
-        messageToEdit = Object.assign([] as Data[], getState().messages.data).reverse().find((data: { userId: string; }) => data.userId === mock.userId);
-    }
-    dispatch({
+export const editMessageShowUnindexed = (head: boolean) => {
+    return ({
         type: EDIT_MESSAGE_SHOW_UNINDEXED,
-        payload: {
-            messageId: messageToEdit ? messageToEdit.id : editingMessageInitial.messageId,
-            message: messageToEdit ? messageToEdit.text : editingMessageInitial.message
-        }
-    } as EditMessageShowUnindexed)
+        head: head
+    })
 }
 
-export const editMessageSave = (messageId: string, message: string) => (dispatch: any, getState: any) => {
-    dispatch({
-        type: EDIT_MESSAGE_SAVE,
-        payload: getState().messages.data.filter((el: { id: string; userId: string; text: string; editedAt: string; }) => {
-            if (el.id === messageId && el.userId === mock.userId && el.text !== message) {
-                el.text = message
-                el.editedAt = new Date(Date.now()).toString();
-            }
-            return true;
-        })
-    } as EditMessageSave)
+export const editMessageSave = (messageId: string, message: string) => {
+    return{
+        type: EDIT_MESSAGE_SAVE_REQUEST,
+        message: message,
+        messageId: messageId
+    };
 }
 
-export const editMessageInvalidateAndClose = (messageId: string) => (dispatch: any) => {
-    dispatch({
-        type: EDIT_MESSAGE_INVALIDATE,
-        payload: Object.assign({}, editingMessageInitial)
-    } as EditMessageInvalidate)
+export const editMessageInvalidateAndClose =()=> {
+    return{
+        type: EDIT_MESSAGE_INVALIDATE_REQUEST
+    }
 }

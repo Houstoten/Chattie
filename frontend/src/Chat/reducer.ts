@@ -16,14 +16,6 @@ function messages(state = { data: [] as Data[], thisUserId: mock.userId as strin
 
         case (actionTypes.INVALIDATE_MESSAGES):
             return { ...state, data: [] }
-        case (mActionTypes.LIKE_MESSAGE):
-            return { ...state, data: action.payload }
-
-        case (mActionTypes.DELETE_MESSAGE):
-            return { ...state, data: action.payload }
-
-        case (iActionTypes.INPUT_MESSAGE):
-            return ({ ...state, data: [...state.data, action.payload] });
 
         case (eActionTypes.EDIT_MESSAGE_SAVE):
             return ({

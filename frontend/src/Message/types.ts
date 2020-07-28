@@ -1,16 +1,15 @@
-import { Data } from "../Common";
-
-export const DELETE_MESSAGE = "DELETE_MESSAGE";
+export const DELETE_MESSAGE_REQUEST = "DELETE_MESSAGE_REQUEST";
 export const LIKE_MESSAGE = "LIKE_MESSAGE";
 
-export interface DeleteMessage {
-    type: typeof DELETE_MESSAGE
-    payload: Data[]
+export interface DeleteMessageRequest {
+    type: typeof DELETE_MESSAGE_REQUEST
+    messageId: string
 }
 
 export interface LikeMessage {
     type: typeof LIKE_MESSAGE
-    payload: Data[]
+    messageId: string
+    likerId: string
 }
 
-export type MessageActionTypes = DeleteMessage | LikeMessage;
+export type MessageActionTypes = DeleteMessageRequest | LikeMessage;
