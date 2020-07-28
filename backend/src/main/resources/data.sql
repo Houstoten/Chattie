@@ -2,17 +2,17 @@ insert into users
     (id, name, avatar, password, is_admin)
 values ('9e243930-83c9-11e9-8e0c-8f1a686f4ce4', 'Ruth',
         'https://resizing.flixster.com/kr0IphfLGZqni5JOWDS2P1-zod4=/280x250/v1.cjs0OTQ2NztqOzE4NDk1OzEyMDA7MjgwOzI1MA',
-        '8D7C3CBD40C916E95F23ED1B6AEA1D53262E1081010A727854D6ED8A5A4181C1', false),
+        'Ruth', false),
        ('533b5230-1b8f-11e8-9629-c7eca82aa7bd', 'Wendy',
         'https://resizing.flixster.com/EVAkglctn7E9B0hVKJrueplabuQ=/220x196/v1.cjs0NjYwNjtqOzE4NDk1OzEyMDA7MjIwOzE5Ng',
-        '966B04E1166554524D9F310D3B0A7759CE74CE202FE04A9A51CD06FDC732D7FE', false),
+        'Wendy', false),
        ('4b003c20-1b8f-11e8-9629-c7eca82aa7bd', 'Helen',
         'https://resizing.flixster.com/PCEX63VBu7wVvdt9Eq-FrTI6d_4=/300x300/v1.cjs0MzYxNjtqOzE4NDk1OzEyMDA7MzQ5OzMxMQ',
-        '9709CE778B113727F49CA40A0C35083D75EF01C66C48BF60BABDD33CCC75F786', false),
+        'Helen', false),
        ('5328dba1-1b8f-11e8-9629-c7eca82aa7bd', 'Ben', 'https://www.aceshowbiz.com/images/photo/tom_pelphrey.jpg',
-        '030D756286E59F22A464C36E1FBFF606A795DFC70AAF0108BD86F2AA193D05F4', false),
+        'Ben', false),
        ('5328dba4-1b8f-27e8-9629-c7eca82aa7bd', 'admin', 'none',
-        '8C6976E5B5410415BDE908BD4DEE15DFB167A9C873FC4BB8A81F6F2AB448A918', true);
+        'admin', true);
 
 insert into messages
     (id, user_id, text, created_at, edited_at)
