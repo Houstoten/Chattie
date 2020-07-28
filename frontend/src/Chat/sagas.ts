@@ -1,11 +1,11 @@
-import { call, put, takeEvery, all } from 'redux-saga/effects'
+import { call, put, takeEvery, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { api, errorData, Data } from '../Common'
 import { RESPONSE_MESSAGES, REQUEST_MESSAGES } from './types';
 
 export function* fetchMessages() {
     try {
-        const messages = yield call(axios.get, `${api}/messages`);
+        const messages = yield call(axios.get, `${api}/messages`, { headers: yield select((state: any) => state.thisUser.credentials) });
         messages.data.sort((a: { createdAt: Date; }, b: { createdAt: Date; }) => {
             return (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
         });

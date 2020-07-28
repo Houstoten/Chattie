@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Data } from "../Common";
 import { bindActionCreators } from "redux";
 import React from "react";
+import { Link } from 'react-router-dom';
 import { editMessageSave, editMessageInvalidateAndClose } from './actions'
 const { connect } = require('react-redux');
 
@@ -63,16 +64,18 @@ const MessageEdit = (props: {
                         }
                         }>
                         <i className="fas fa-times"></i></button>
-                    <button disabled={input.trim().length === 0
-                        ? true
-                        : false
-                    }
-                        className="button editBtn"
-                        onClick={() => {
-                            validateAndComplete();
+                    <Link to="/" style={input.trim().length === 0 ? { pointerEvents: "none" } : {}}>
+                        <button disabled={input.trim().length === 0
+                            ? true
+                            : false
                         }
-                        }>
-                        <i className="far fa-paper-plane"></i></button>
+                            className="button editBtn"
+                            onClick={() => {
+                                validateAndComplete();
+                            }
+                            }>
+                            <i className="far fa-paper-plane"></i></button>
+                    </Link>
                 </div>
             </div>
         </div>

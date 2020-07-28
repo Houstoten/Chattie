@@ -3,6 +3,7 @@ import '../css/chat.css';
 import { likeMessage, deleteMessage } from './actions'
 import { editMessageShow } from '../MessageEdit/actions'
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom'
 import { Data } from '../Common';
 const { connect } = require('react-redux');
 
@@ -12,7 +13,8 @@ const Message = (props: {
     editingMessage: any
     likeMessage: (messageId: string, likerId: string) => void,
     editMessageShow: (messageId: string) => void,
-    deleteMessage: (messageId: string) => void
+    deleteMessage: (messageId: string) => void,
+    history: any
 }): any => {
 
     const [scrolling, setScrolling] = useState(true);
@@ -42,7 +44,7 @@ const Message = (props: {
                     {selfMessage &&
                         <div className="message-edit additional-component additional-onHover">
                             {props.editingMessage.messageId.length === 0 &&
-                                <i className="fas fa-cog" onClick={() => { props.editMessageShow(props.data.id) }}></i>
+                                <Link to={`/edit/${props.data.id}`}><i className="fas fa-cog" onClick={() => { props.editMessageShow(props.data.id); }}></i></Link>
                             }
                         </div>
                     }

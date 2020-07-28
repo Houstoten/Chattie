@@ -29,9 +29,16 @@ export const mock: Data = {
     createdAt: ""
 }
 
+export const credentialsInitial = {
+    id: null,
+    token: null,
+    admin: null
+}
+
 export const editingMessageInitial = {
     messageId: "",
     message: ""
 }
 
-export const api = "https://bsa-husarov-chattie-backend.herokuapp.com/api";
+export const api = "http://localhost:8080/api";
+//export const api = "https://bsa-husarov-chattie-backend.herokuapp.com/api";

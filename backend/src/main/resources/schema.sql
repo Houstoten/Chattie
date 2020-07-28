@@ -4,7 +4,9 @@ CREATE TABLE users
 (
     id     uuid         not null,
     name   varchar(255) not null,
+    password varchar(255) not null,
     avatar text,
+    is_admin bool not null,
     primary key (id)
 );
 

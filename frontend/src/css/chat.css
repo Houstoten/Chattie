@@ -6,6 +6,19 @@ body {
     background-color: #fff;
 }
 
+.loginPage{
+    position: absolute;
+    width: 40%;
+    top: 20%;
+    left: 30%;
+    display: grid;
+    grid-gap: 20px;
+}
+
+.loginPage img{
+    margin: auto;
+}
+
 .additional-onHover {
     display: none;
 }

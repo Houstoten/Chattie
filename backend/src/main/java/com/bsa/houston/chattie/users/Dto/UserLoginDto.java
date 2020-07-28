@@ -9,10 +9,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 @Data
-public class UserCreateDto {
+public class UserLoginDto {
     private String username;
     private String password;
-    private Boolean isAdmin;
 
     public User toUser() throws NoSuchAlgorithmException {
         return User.builder()
@@ -20,7 +19,6 @@ public class UserCreateDto {
                 .password(DatatypeConverter.printHexBinary(MessageDigest
                         .getInstance("SHA-256")
                         .digest(password.getBytes(StandardCharsets.UTF_8))))
-                .admin(isAdmin)
                 .build();
     }
 }

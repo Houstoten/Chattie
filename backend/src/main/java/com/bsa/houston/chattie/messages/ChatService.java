@@ -45,11 +45,10 @@ public class ChatService {
 
     public void likeMessage(UUID id, UUID userId) {
         var message = chatRepository.getOne(id);
-        var user = userRepository.getOne(userId);
-        if (message.getLikes().contains(user)) {
-            message.getLikes().remove(user);
+        if (message.getLikes().stream().map(User::getId).anyMatch(x -> x.equals(userId))) {
+            message.getLikes().removeIf(user->user.getId().equals(userId));
         } else {
-            message.getLikes().add(user);
+            message.getLikes().add(userRepository.getOne(userId));
         }
         chatRepository.save(message);
     }

@@ -1,4 +1,4 @@
-import { call, put, takeEvery, all } from 'redux-saga/effects'
+import { call, put, takeEvery, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { DELETE_MESSAGE_REQUEST, LIKE_MESSAGE } from './types';
 import { REQUEST_MESSAGES } from '../Chat/types';
@@ -8,7 +8,7 @@ export function* likeMessage(action: any) {
     try {
         const formData = new FormData();
         formData.append("userId", action.likerId);
-        yield call(axios.put, `${api}/messages/like/${action.messageId}`, formData);
+        yield call(axios.put, `${api}/messages/like/${action.messageId}`, formData, { headers: yield select((state: any) => state.thisUser.credentials) });
         yield* [put({ type: REQUEST_MESSAGES })]
     } catch (error) {
         console.log(error);
@@ -21,7 +21,7 @@ function* watchLikeMessage() {
 
 export function* deleteMessage(action: any) {
     try {
-        yield call(axios.delete, `${api}/messages/${action.messageId}`);
+        yield call(axios.delete, `${api}/messages/${action.messageId}`, { headers: yield select((state: any) => state.thisUser.credentials) });
         yield* [put({ type: REQUEST_MESSAGES })]
     } catch (error) {
         console.log(error);

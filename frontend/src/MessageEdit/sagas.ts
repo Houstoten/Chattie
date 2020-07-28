@@ -1,4 +1,4 @@
-import { call, put, takeEvery, all } from 'redux-saga/effects'
+import { call, put, takeEvery, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { api, mock, editingMessageInitial } from '../Common'
 import { EDIT_MESSAGE_SHOW, EDIT_MESSAGE_SHOW_UNINDEXED, EDIT_MESSAGE_SHOW_RECEIVED, EDIT_MESSAGE_INVALIDATE, EDIT_MESSAGE_SAVE_REQUEST, EDIT_MESSAGE_INVALIDATE_REQUEST } from './types';
@@ -17,7 +17,7 @@ function* watchEditMessagesInvalidate() {
 
 export function* editMessageSave(action: any) {
     try {
-        yield call(axios.put, `${api}/messages`, { messageId: action.messageId, text: action.message });
+        yield call(axios.put, `${api}/messages`, { messageId: action.messageId, text: action.message }, {headers: yield select((state: any) => state.thisUser.credentials)});
         yield* [put({
             type: EDIT_MESSAGE_INVALIDATE_REQUEST
         }), put({ type: REQUEST_MESSAGES })]
@@ -36,7 +36,7 @@ export function* editMessageShow(action: any) {
         if (action.messageId) {
             message = (yield call(axios.get, `${api}/messages/${action.messageId}`)).data;
         } else {
-            let messagesReceived = yield call(axios.get, `${api}/messages`, { params: { userId: mock.userId } });
+            let messagesReceived = yield call(axios.get, `${api}/messages`, { params: { userId: mock.userId }, headers: yield select((state: any) => state.thisUser.credentials) });
             messagesReceived.data
                 .sort((a: { createdAt: Date; }, b: { createdAt: Date; }) => {
                     return (action.head

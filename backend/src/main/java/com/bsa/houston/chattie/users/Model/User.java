@@ -27,6 +27,12 @@ public class User {
     @Column(name = "avatar")
     private String avatar;
 
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "is_admin")
+    private boolean admin;
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "likes"
