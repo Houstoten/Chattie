@@ -5,6 +5,7 @@ import com.bsa.houston.chattie.users.Dto.UserCreateDto;
 import com.bsa.houston.chattie.users.Dto.UserCreateResponseDto;
 import com.bsa.houston.chattie.users.Dto.UserLoginDto;
 import com.bsa.houston.chattie.users.Dto.UserResponseDto;
+import com.bsa.houston.chattie.users.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +49,16 @@ public class UserConroller {
     public ResponseEntity<UserCreateResponseDto> loginUser(@RequestBody UserLoginDto userLoginDto) throws NoSuchAlgorithmException {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(userService.loginUser(userLoginDto));
+        } catch (WrongCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> getUserByIdDetailed(@PathVariable UUID userId
+            , @RequestHeader UUID id, @RequestHeader String token) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(userId, token, id));
         } catch (WrongCredentialsException e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
