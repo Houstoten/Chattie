@@ -4,6 +4,8 @@ import com.bsa.houston.chattie.users.Model.User;
 import lombok.Data;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
+import java.util.UUID;
 
 @Data
 public class UserCreateDto {
@@ -11,18 +13,20 @@ public class UserCreateDto {
     private String password;
     private String avatar;
     private Boolean admin;
+    private Optional<UUID> id;
 
     public User toUser() throws NoSuchAlgorithmException {
         return User.builder()
-                .name(username)
+                .username(username)
                 .avatar(avatar)
                 .password(password)
                 .admin(admin)
+                .id(id.orElse(null))
                 .build();
     }
 
     public User fromUserTo(User user) {
-        user.setName(username);
+        user.setUsername(username);
         user.setPassword(password);
         user.setAvatar(avatar);
         user.setAdmin(admin);

@@ -27,7 +27,7 @@ public class MessageResponseDto {
                 .id(message.getId())
                 .userId(message.getUser().getId())
                 .avatar(message.getUser().getAvatar())
-                .user(message.getUser().getName())
+                .user(message.getUser().getUsername())
                 .text(message.getText())
                 .createdAt(message.getCreatedAt())
                 .editedAt(message.getEditedAt())

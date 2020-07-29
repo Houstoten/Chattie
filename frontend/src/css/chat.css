@@ -6,7 +6,7 @@ body {
     background-color: #fff;
 }
 
-.loginPage{
+.loginPage {
     position: absolute;
     width: 40%;
     top: 20%;
@@ -15,8 +15,27 @@ body {
     grid-gap: 20px;
 }
 
-.loginPage img{
+.userPage {
+    position: absolute;
+    width: 30%;
+    left: 35%;
+    top: 10%;
+    display: grid;
+    grid-gap: 10px;
+}
+
+.userPage img {
     margin: auto;
+    border-radius: 30%;
+}
+
+.loginPage img {
+    margin: auto;
+}
+
+.userPage input[type=checkbox]::after {
+    content: "Admin?";
+    padding-left: 20px;
 }
 
 .additional-onHover {
@@ -219,7 +238,7 @@ button {
     color: transparent !important;
 }
 
-.abortEditBtn:hover .fa-times  {
+.abortEditBtn:hover .fa-times {
     color: #fff;
 }
 

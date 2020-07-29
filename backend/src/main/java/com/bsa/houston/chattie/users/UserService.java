@@ -25,16 +25,20 @@ public class UserService {
     }
 
     public UserCreateResponseDto createUser(UserCreateDto userCreateDto) throws NoSuchAlgorithmException {
-        var user = userRepository.findUserByName(userCreateDto.getUsername());
-        if (user.isEmpty()) {
+        if (userCreateDto.getId().isPresent()) {
+            var user = userRepository.findById(userCreateDto.getId().get());
+            if (user.isEmpty()) {
+                return UserCreateResponseDto.fromUser(userRepository.save(userCreateDto.toUser()));
+            } else {
+                return UserCreateResponseDto.fromUser(userRepository.save(userCreateDto.fromUserTo(user.get())));
+            }
+        }else {
             return UserCreateResponseDto.fromUser(userRepository.save(userCreateDto.toUser()));
-        } else {
-            return UserCreateResponseDto.fromUser(userRepository.save(userCreateDto.fromUserTo(user.get())));
         }
     }
 
     public UserCreateResponseDto loginUser(UserLoginDto userLoginDto) throws NoSuchAlgorithmException {
-        return userRepository.findUserByNameAndPassword(userLoginDto.getUsername(), userLoginDto.getPassword())
+        return userRepository.findUserByUsernameAndPassword(userLoginDto.getUsername(), userLoginDto.getPassword())
                 .map(UserCreateResponseDto::fromUser)
                 .orElseThrow(WrongCredentialsException::new);
     }
