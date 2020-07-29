@@ -15,7 +15,7 @@ const Message = (props: {
     likeMessage: (messageId: string, likerId: string) => void,
     editMessageShow: (messageId: string) => void,
     deleteMessage: (messageId: string) => void,
-    editOrCreateUser: (id: string | null) => void
+    openUserEditCreate: (id: string | null) => void
 }): any => {
 
     const [scrolling, setScrolling] = useState(true);
@@ -37,7 +37,7 @@ const Message = (props: {
                 } />}
             <div className="data">
                 <div className={"message-holderName " + (selfMessage ? "message-holderName-self" : "")}>{selfMessage ? "me" : props.data.user}</div>
-                {props.thisUser.admin && <Link to={`/user/${props.thisUser.id}`} onClick={() => openUserEditCreate(props.thisUser.id)}>Edit sender</Link>}
+                {props.thisUser.admin && <Link style={{ fontSize: "1rem" }} to={`/user/${props.data.userId}`} onClick={() => props.openUserEditCreate(props.data.userId)}>Edit sender</Link>}
                 <div className="message-text">{props.data.text}</div>
                 <div className="message-additional">
                     <div className="message-timestamp additional-component">

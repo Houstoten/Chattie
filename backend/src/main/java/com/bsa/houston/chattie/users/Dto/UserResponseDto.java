@@ -12,7 +12,7 @@ public class UserResponseDto {
 
     public static UserResponseDto fromUser(User user){
         return UserResponseDto.builder()
-                .name(user.getName())
+                .name(user.getUsername())
                 .avatar(user.getAvatar())
                 .build();
     }

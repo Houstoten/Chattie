@@ -22,7 +22,7 @@ public class User {
     private UUID id;
 
     @Column(name = "name", nullable = false)
-    private String name;
+    private String username;
 
     @Column(name = "avatar")
     private String avatar;

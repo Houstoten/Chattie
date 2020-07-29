@@ -47,5 +47,5 @@ export const editingMessageInitial = {
     message: ""
 }
 
-export const api = "http://localhost:8080/api";
-//export const api = "https://bsa-husarov-chattie-backend.herokuapp.com/api";
+// export const api = "http://localhost:8080/api";
+export const api = "https://bsa-husarov-chattie-backend.herokuapp.com/api";

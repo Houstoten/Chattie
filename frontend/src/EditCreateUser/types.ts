@@ -9,18 +9,20 @@ export interface EditOrCreateUser {
         password: string
         avatar: string
         admin: boolean
+        id: string
     }
 }
 
 export interface FetchUserDetails {
     type: typeof FETCH_USER_DETAILS
     payload: {
-        name: string
+        username: string
         password: string
         avatar: string
         admin: boolean
     }
     editing: boolean
+    fetching: boolean
 }
 
 export interface FetchUserDetailsRequest {

@@ -15,7 +15,7 @@ public class UserLoginDto {
 
     public User toUser() throws NoSuchAlgorithmException {
         return User.builder()
-                .name(username)
+                .username(username)
                 .password(DatatypeConverter.printHexBinary(MessageDigest
                         .getInstance("SHA-256")
                         .digest(password.getBytes(StandardCharsets.UTF_8))))
